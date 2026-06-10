@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background:#f5f7fa;
+            margin:0;
+            padding:0;
+        }
+
+        h2{
+            text-align:center;
+            background:#0d6efd;
+            color:#fff;
+            padding:15px;
+            margin:0;
+        }
+
+        table{
+            width:90%;
+            margin:30px auto;
+            border-collapse:collapse;
+            background:#fff;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            border-radius:8px;
+            overflow:hidden;
+        }
+
+        th{
+            background:#0d6efd;
+            color:#fff;
+            padding:12px;
+            text-align:center;
+        }
+
+        td{
+            padding:12px;
+            text-align:center;
+            border-bottom:1px solid #eee;
+        }
+
+        tr:hover{
+            background:#f1f5ff;
+        }
+
+        .btn{
+            padding:5px 10px;
+            border:none;
+            cursor:pointer;
+            border-radius:5px;
+        }
+
+        .plus{ background:green; color:#fff; }
+        .minus{ background:orange; color:#fff; }
+        .delete{ background:red; color:#fff; }
+
+        .total{
+            width:90%;
+            margin:20px auto;
+            text-align:right;
+            font-size:20px;
+            font-weight:bold;
+        }
+
+        img{
+            width:60px;
+            height:60px;
+            object-fit:cover;
+            border-radius:5px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Your Cart</h2>
+
+<table>
+    <tr>
+        <th>Image</th>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Total</th>
+        <th>Action</th>
+    </tr>
+
+    {% set grand_total = 0 %}
+
+    {% for c in cart_items %}
+        {% set total = c[2] * c[3] %}
+        {% set grand_total = grand_total + total %}
+
+    <tr>
+        <td>
+            <img src="{{ url_for('static', filename='uploads/' + c[4]) }}">
+        </td>
+
+        <td>{{ c[1] }}</td>
+        <td>₹{{ c[2] }}</td>
+
+        <td>
+            <a href="/cart/increase/{{ c[0] }}">
+                <button class="btn plus">+</button>
+            </a>
+
+            {{ c[3] }}
+
+            <a href="/cart/decrease/{{ c[0] }}">
+                <button class="btn minus">-</button>
+            </a>
+        </td>
+
+        <td>₹{{ total }}</td>
+
+        <td>
+            <a href="/cart/remove/{{ c[0] }}">
+                <button class="btn delete">Remove</button>
+            </a>
+        </td>
+    </tr>
+
+    {% endfor %}
+</table>
+{% set ns = namespace(grand_total=0) %}
+
+{% for c in cart_items %}
+    {% set total = c[2] * c[3] %}
+    {% set ns.grand_total = ns.grand_total + total %}
+{% endfor %}
+<div class="total">
+    Grand Total: ₹{{ ns.grand_total }}
+</div>
+
+</body>
+</html>

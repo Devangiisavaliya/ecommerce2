@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subcategories</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background: #f5f6fa;
+        }
+
+        .container-box {
+            background: white;
+            padding: 25px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container container-box">
+
+    <h2>➕ Add Subcategory</h2>
+
+    <form method="POST" action="/admin/subcategories/add" class="row g-3">
+
+        <div class="col-md-5">
+            <select name="category_id" class="form-control" required>
+                <option value="">Select Category</option>
+                {% for c in categories %}
+                <option value="{{ c[0] }}">{{ c[1] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="col-md-5">
+            <input type="text" name="name" class="form-control" placeholder="Subcategory Name" required>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-success w-100">Add</button>
+        </div>
+
+    </form>
+
+    <hr>
+
+    <h2>📋 All Subcategories</h2>
+
+    <table class="table table-bordered table-striped">
+
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Subcategory</th>
+                <th>Category</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for s in subcategories %}
+            <tr>
+                <td>{{ s[0] }}</td>
+                <td>{{ s[1] }}</td>
+                <td>{{ s[2] }}</td>
+                <td>
+                    <a href="/admin/subcategories/delete/{{ s[0] }}" class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+
+</div>
+
+</body>
+</html>

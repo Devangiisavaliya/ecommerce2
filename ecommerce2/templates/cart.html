@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cart</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:#f5f7fa;
+        }
+
+        /* ================= HEADER ================= */
+
+        h2{
+            text-align:center;
+            background:#0d6efd;
+            color:#fff;
+            padding:15px;
+        }
+
+        /* ================= CART WRAPPER ================= */
+
+        .cart-container{
+            width:90%;
+            margin:30px auto;
+            display:grid;
+            gap:15px;
+        }
+
+        /* ================= CART CARD ================= */
+
+        .cart-item{
+            background:#fff;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:15px;
+            border-radius:10px;
+            box-shadow:0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .cart-left{
+            display:flex;
+            align-items:center;
+            gap:15px;
+        }
+
+        .cart-left img{
+            width:70px;
+            height:70px;
+            object-fit:cover;
+            border-radius:8px;
+        }
+
+        .cart-info h3{
+            font-size:16px;
+            margin-bottom:5px;
+        }
+
+        .price{
+            color:#0d6efd;
+            font-weight:bold;
+        }
+
+        /* ================= QTY ================= */
+
+        .qty{
+            display:flex;
+            align-items:center;
+            gap:8px;
+        }
+
+        .qty button{
+            padding:5px 10px;
+            border:none;
+            cursor:pointer;
+            border-radius:5px;
+        }
+
+        .plus{ background:green; color:#fff; }
+        .minus{ background:orange; color:#fff; }
+
+        /* ================= ACTION ================= */
+
+        .remove-btn{
+            background:red;
+            color:#fff;
+            border:none;
+            padding:6px 10px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        .checkout{
+            background:green;
+            color:#fff;
+            border:none;
+            padding:8px 12px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+
+        /* ================= TOTAL ================= */
+
+        .total{
+            width:90%;
+            margin:20px auto;
+            text-align:right;
+            font-size:20px;
+            font-weight:bold;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media(max-width:768px){
+
+            .cart-item{
+                flex-direction:column;
+                align-items:flex-start;
+                gap:10px;
+            }
+
+            .cart-left img{
+                width:60px;
+                height:60px;
+            }
+
+            .total{
+                text-align:center;
+                font-size:18px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h2>Your Cart</h2>
+
+<div class="cart-container">
+
+    {% set ns = namespace(grand_total=0) %}
+
+    {% for c in cart_items %}
+
+        {% set total = c[2] * c[3] %}
+        {% set ns.grand_total = ns.grand_total + total %}
+
+        <div class="cart-item">
+
+            <!-- LEFT -->
+            <div class="cart-left">
+                <img src="{{ url_for('static', filename='uploads/' + c[4]) }}">
+
+                <div class="cart-info">
+                    <h3>{{ c[1] }}</h3>
+                    <div class="price">₹{{ c[2] }}</div>
+                </div>
+            </div>
+
+            <!-- QTY -->
+            <div class="qty">
+                
+                <a href="/cart/decrease/{{ c[0] }}">
+                    <button class="minus">-</button>
+                </a>
+                <span>{{ c[3] }}</span>
+                <a href="/cart/increase/{{ c[0] }}">
+                    <button class="plus">+</button>
+                </a>
+
+            </div>
+
+            <!-- ACTION -->
+            <div>
+                <a href="/cart/remove/{{ c[0] }}">
+                    <button class="remove-btn">Remove</button>
+                </a>
+
+                <a href="/checkout">
+                    <button class="checkout">Checkout</button>
+                </a>
+            </div>
+
+        </div>
+
+    {% endfor %}
+
+</div>
+
+<div class="total">
+    Grand Total: ₹{{ ns.grand_total }}
+</div>
+
+</body>
+</html>

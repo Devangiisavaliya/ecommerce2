@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Product</title>
+
+    <style>
+
+        body{
+            font-family:Arial;
+            background:#f5f7fa;
+        }
+
+        form{
+            width:350px;
+            margin:50px auto;
+            background:white;
+            padding:25px;
+            border-radius:10px;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#0d6efd;
+            color:white;
+            border:none;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1 style="text-align:center;">Edit Product</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <input type="text" name="name" value="{{ product[1] }}" required>
+
+    <input type="text" name="price" value="{{ product[2] }}" required>
+
+    <img src="{{ url_for('static', filename='uploads/' + product[3]) }}" width="100">
+
+    <input type="file" name="image">
+
+    <button type="submit">Update Product</button>
+
+</form>
+
+</body>
+</html>

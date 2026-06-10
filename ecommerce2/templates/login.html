@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f2f2f2;
+            margin: 0;
+
+            /* ✅ better than 100vh flex issue */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            width: 350px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .link a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        /* ================= MOBILE FIX ================= */
+
+        @media(max-width:768px){
+
+            body{
+                align-items: center;
+                padding: 15px;
+            }
+
+            .box{
+                width: 100%;
+                max-width: 400px;
+                padding: 20px;
+            }
+
+            h2{
+                font-size: 20px;
+            }
+
+            input{
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            button{
+                padding: 12px;
+                font-size: 15px;
+            }
+        }
+
+        @media(max-width:480px){
+
+            .box{
+                padding: 15px;
+            }
+
+            h2{
+                font-size: 18px;
+            }
+
+            input{
+                font-size: 14px;
+            }
+
+            button{
+                font-size: 14px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+    <h2>User Login</h2>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST">
+
+        <input type="email" name="email" placeholder="Enter Email" required>
+
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit">Login</button>
+
+    </form>
+
+    <div class="link">
+        <p>Don't have an account? <a href="/signup">Signup</a></p>
+    </div>
+
+</div>
+
+</body>
+</html>

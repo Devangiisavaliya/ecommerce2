@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f5f7fa;
+            margin:0;
+            padding:0;
+        }
+
+        .header{
+            background:#0d6efd;
+            color:#fff;
+            text-align:center;
+            padding:20px;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        .container{
+            width:90%;
+            max-width:900px;
+            margin:40px auto;
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:30px;
+        }
+
+        .info-box, .form-box{
+            background:#fff;
+            padding:25px;
+            border-radius:10px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .info-box h2{
+            color:#0d6efd;
+            margin-bottom:15px;
+        }
+
+        .info-box p{
+            margin:10px 0;
+            color:#333;
+        }
+
+        input, textarea{
+            width:100%;
+            padding:12px;
+            margin:10px 0;
+            border:1px solid #ddd;
+            border-radius:6px;
+            outline:none;
+            font-size:15px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#0d6efd;
+            color:#fff;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:16px;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#084298;
+        }
+
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================= */
+
+        @media(max-width:768px){
+
+            .header{
+                font-size:18px;
+                padding:15px;
+            }
+
+            .container{
+                grid-template-columns:1fr;
+                width:95%;
+                margin:20px auto;
+                gap:15px;
+            }
+
+            .info-box, .form-box{
+                padding:18px;
+            }
+
+            input, textarea{
+                font-size:14px;
+                padding:10px;
+            }
+
+            button{
+                font-size:15px;
+                padding:10px;
+            }
+        }
+
+        @media(max-width:480px){
+
+            .header{
+                font-size:16px;
+            }
+
+            .info-box h2{
+                font-size:18px;
+            }
+
+            .info-box p{
+                font-size:14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    Contact Us
+</div>
+
+<div class="container">
+
+    <!-- INFO SIDE -->
+    <div class="info-box">
+        <h2>Get In Touch</h2>
+        <p>📧 support@elitestore.com</p>
+        <p>📞 +91 98765 43210</p>
+        <p>📍 Ahmedabad, India</p>
+    </div>
+
+    <!-- FORM SIDE -->
+    <div class="form-box">
+
+        <form method="POST" action="/contact">
+
+            <input type="text" name="name" placeholder="Your Name" required>
+
+            <input type="email" name="email" placeholder="Your Email" required>
+
+            <textarea name="message" rows="5" placeholder="Your Message"></textarea>
+
+            <button type="submit">Send Message</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

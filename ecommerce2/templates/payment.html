@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table th {
+            background: #007bff;
+            color: white;
+            padding: 12px;
+        }
+
+        table td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table tr:hover {
+            background: #f1f1f1;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 20px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #222;
+        }
+
+        .btn-box {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .pay-btn {
+            padding: 12px 30px;
+            background: #28a745;
+            color: white;
+            border: none;
+            font-size: 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pay-btn:hover {
+            background: #218838;
+            transform: scale(1.05);
+        }
+
+        /*
+           MOBILE RESPONSIVE ADD ONLY
+        */
+
+        @media(max-width:768px){
+
+            .container{
+                width:95%;
+                padding:15px;
+            }
+
+            h1{
+                font-size:20px;
+                padding:15px;
+            }
+
+            table th,
+            table td{
+                padding:8px;
+                font-size:14px;
+            }
+
+            .total{
+                text-align:center;
+                font-size:18px;
+            }
+
+            .pay-btn{
+                width:100%;
+                font-size:16px;
+                padding:10px;
+            }
+        }
+
+        @media(max-width:480px){
+
+            table th,
+            table td{
+                font-size:12px;
+                padding:6px;
+            }
+
+            h1{
+                font-size:18px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<h1>Checkout Payment</h1>
+
+<div class="container">
+
+    <table>
+
+        <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+        </tr>
+
+        {% for item in cart_items %}
+
+        <tr>
+            <td>{{ item[1] }}</td>
+            <td>₹{{ item[2] }}</td>
+            <td>{{ item[3] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <div class="total">
+        Total: ₹{{ total }}
+    </div>
+
+    <div class="btn-box">
+        <a href="/payment_success">
+            <button class="pay-btn">Pay Now</button>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
